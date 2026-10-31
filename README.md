@@ -18,6 +18,8 @@ opsu!revive focuses on **compatibility** and **performance** on modern Android d
 | --- | --- | --- |
 | POCO X6 Pro | MediaTek Dimensity 8300 Ultra | Tested |
 
+- Recommended audio offset: ~90 ms as a starting point (based on the tested device).
+
 Other devices are untested. Reports are welcome in the [issue tracker](https://github.com/Clourynth/opsu-revive/issues).
 
 ## Roadmap
