@@ -4,7 +4,9 @@ A maintained fork of [opsu!](https://github.com/itdelatrisu/opsu) for Android, b
 
 opsu!revive focuses on **compatibility** and **performance** on modern Android devices.
 
-##Download:
+##
+**Download:**
+
 <a href="https://github.com/Clourynth/opsu-revive/releases"><img src="https://img.shields.io/github/v/release/Clourynth/opsu-revive?include_prereleases&label=release" alt="Release"></a>
 
 ## What's new in opsu!revive
