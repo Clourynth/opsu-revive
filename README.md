@@ -8,9 +8,11 @@ opsu!revive focuses on **compatibility** and **performance** on modern Android d
 
 ![Release](https://img.shields.io/github/v/release/Clourynth/opsu-revive?include_prereleases&label=release)
 
-](https://github.com/Clourynth/opsu-revive/releases)
+[
 
-> ⚠️ **Beta / Experimental.** [Download the latest APK here](https://github.com/Clourynth/opsu-revive/releases).
+![Release](https://img.shields.io/github/v/release/Clourynth/opsu-revive?include_prereleases&label=release)
+
+](https://github.com/Clourynth/opsu-revive/releases)
 
 ## What's new in opsu!revive
 
