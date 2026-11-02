@@ -1,0 +1,132 @@
+--- a/itdelatrisu/opsu/ErrorHandler.smali
++++ b/itdelatrisu/opsu/ErrorHandler.smali
+@@ -237,7 +237,7 @@
+ 
+     .line 201
+     :try_start_3
+-    const-string v1, "https://github.com/fluddokt/opsu/issues/new?title=%s&body=%s"
++    const-string v1, "https://github.com/Clourynth/opsu-revive/issues/new?title=%s&body=%s"
+ 
+     const/4 v2, 0x2
+ 
+@@ -291,7 +291,7 @@
+     invoke-static {v1}, Lfluddokt/opsu/fake/Log;->warn(Ljava/lang/String;)V
+ 
+     .line 207
+-    const-string v1, "https://github.com/fluddokt/opsu/issues/new?title=%s&body=%s"
++    const-string v1, "https://github.com/Clourynth/opsu-revive/issues/new?title=%s&body=%s"
+ 
+     new-array v2, v7, [Ljava/lang/Object;
+ 
+--- a/itdelatrisu/opsu/OpsuConstants.smali
++++ b/itdelatrisu/opsu/OpsuConstants.smali
+@@ -4,13 +4,13 @@
+ 
+ 
+ # static fields
+-.field private static final CHANGELOG_URL:Ljava/lang/String; = "https://github.com/fluddokt/opsu/releases/tag/%s"
++.field private static final CHANGELOG_URL:Ljava/lang/String; = "https://github.com/Clourynth/opsu-revive/releases/tag/%s"
+ 
+ .field public static final CREDITS_URI:Ljava/net/URI;
+ 
+-.field public static final ISSUES_URL:Ljava/lang/String; = "https://github.com/fluddokt/opsu/issues/new?title=%s&body=%s"
++.field public static final ISSUES_URL:Ljava/lang/String; = "https://github.com/Clourynth/opsu-revive/issues/new?title=%s&body=%s"
+ 
+-.field public static final PROJECT_AUTHOR:Ljava/lang/String; = "@itdelatrisu + @fluddokt"
++.field public static final PROJECT_AUTHOR:Ljava/lang/String; = "@itdelatrisu + @fluddokt + @Clourynth"
+ 
+ .field public static final PROJECT_NAME:Ljava/lang/String; = "opsu!"
+ 
+@@ -36,7 +36,7 @@
+     sput-object v0, Litdelatrisu/opsu/OpsuConstants;->WEBSITE_URI:Ljava/net/URI;
+ 
+     .line 39
+-    const-string v0, "https://github.com/fluddokt/opsu"
++    const-string v0, "https://github.com/Clourynth/opsu-revive"
+ 
+     invoke-static {v0}, Ljava/net/URI;->create(Ljava/lang/String;)Ljava/net/URI;
+ 
+@@ -74,7 +74,7 @@
+     .prologue
+     .line 56
+     :try_start_0
+-    const-string v1, "https://github.com/fluddokt/opsu/releases/tag/%s"
++    const-string v1, "https://github.com/Clourynth/opsu-revive/releases/tag/%s"
+ 
+     const/4 v2, 0x1
+ 
+--- a/itdelatrisu/opsu/states/ButtonMenu$MenuState$9.smali
++++ b/itdelatrisu/opsu/states/ButtonMenu$MenuState$9.smali
+@@ -54,17 +54,19 @@
+ 
+     .line 262
+     .local v0, "version":Ljava/lang/String;
+-    new-array v2, v8, [Ljava/lang/String;
++    const/4 v1, 0x3
++
++    new-array v2, v1, [Ljava/lang/String;
+ 
+     .line 264
+-    const-string v3, "%s %s by %s"
++    const-string v3, "%s %s"
+ 
+     const/4 v1, 0x3
+ 
+     new-array v4, v1, [Ljava/lang/Object;
+ 
+     .line 265
+-    const-string v1, "opsu!"
++    const-string v1, "opsu!revive"
+ 
+     aput-object v1, v4, v6
+ 
+@@ -77,7 +79,7 @@
+     aput-object v1, v4, v7
+ 
+     .line 267
+-    const-string v1, "@itdelatrisu + @fluddokt"
++    const-string v1, "@itdelatrisu + @fluddokt + @Clourynth"
+ 
+     aput-object v1, v4, v8
+ 
+@@ -88,10 +90,19 @@
+ 
+     aput-object v1, v2, v6
+ 
++
++    const-string v3, "by %3$s"
++
++    invoke-static {v3, v4}, Ljava/lang/String;->format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
++
++    move-result-object v1
++
++    aput-object v1, v2, v7
++
+     .line 269
+     const-string v1, "Click an option below to learn more!"
+ 
+-    aput-object v1, v2, v7
++    aput-object v1, v2, v8
+ 
+     .line 262
+     return-object v2
+--- a/itdelatrisu/opsu/states/MainMenu.smali
++++ b/itdelatrisu/opsu/states/MainMenu.smali
+@@ -6852,7 +6852,7 @@
+     const/16 v18, 0x0
+ 
+     .line 645
+-    const-string v21, "opsu!"
++    const-string v21, "opsu!revive"
+ 
+     aput-object v21, v20, v18
+ 
+@@ -6869,7 +6869,7 @@
+     const/16 v18, 0x2
+ 
+     .line 647
+-    const-string v21, "@itdelatrisu + @fluddokt"
++    const-string v21, "@itdelatrisu + @fluddokt + @Clourynth"
+ 
+     aput-object v21, v20, v18
+ 

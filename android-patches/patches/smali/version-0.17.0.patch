@@ -1,0 +1,33 @@
+--- a/fluddokt/opsu/fake/GameOpsu.smali
++++ b/fluddokt/opsu/fake/GameOpsu.smali
+@@ -4,7 +4,7 @@
+ 
+ 
+ # static fields
+-.field public static final VERSION:Ljava/lang/String; = "0.16.1a"
++.field public static final VERSION:Ljava/lang/String; = "0.17.0"
+ 
+ .field static gameOpsu:Lfluddokt/opsu/fake/GameOpsu;
+ 
+--- a/itdelatrisu/opsu/ErrorHandler.smali
++++ b/itdelatrisu/opsu/ErrorHandler.smali
+@@ -99,7 +99,7 @@
+     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+ 
+     .line 244
+-    const-string v1, "0.16.1a"
++    const-string v1, "0.17.0"
+ 
+     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+ 
+--- a/itdelatrisu/opsu/downloads/Updater.smali
++++ b/itdelatrisu/opsu/downloads/Updater.smali
+@@ -323,7 +323,7 @@
+ 
+     .prologue
+     .line 198
+-    const-string v0, "0.16.1a"
++    const-string v0, "0.17.0"
+ 
+     return-object v0
+ .end method

@@ -1,0 +1,90 @@
+--- a/fluddokt/opsu/android/AndroidLauncher.smali
++++ b/fluddokt/opsu/android/AndroidLauncher.smali
+@@ -17,15 +17,52 @@
+ 
+ # virtual methods
+ .method protected onCreate(Landroid/os/Bundle;)V
+-    .registers 4
++    .registers 8
+     .param p1, "savedInstanceState"    # Landroid/os/Bundle;
+ 
+     .prologue
+-    const/4 v1, 0x1
+-
+     .line 18
+     invoke-super {p0, p1}, Lcom/badlogic/gdx/backends/android/AndroidApplication;->onCreate(Landroid/os/Bundle;)V
+ 
++    sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
++
++    const/16 v1, 0x17
++
++    if-lt v0, v1, :perm_ok
++
++    const-string v0, "android.permission.WRITE_EXTERNAL_STORAGE"
++
++    invoke-virtual {p0, v0}, Lfluddokt/opsu/android/AndroidLauncher;->checkSelfPermission(Ljava/lang/String;)I
++
++    move-result v1
++
++    if-eqz v1, :perm_ok
++
++    new-instance v2, Lcom/badlogic/gdx/backends/android/AndroidApplicationConfiguration;
++
++    invoke-direct {v2}, Lcom/badlogic/gdx/backends/android/AndroidApplicationConfiguration;-><init>()V
++
++    new-instance v3, Lfluddokt/opsu/android/EmptyListener;
++
++    invoke-direct {v3}, Lfluddokt/opsu/android/EmptyListener;-><init>()V
++
++    invoke-virtual {p0, v3, v2}, Lfluddokt/opsu/android/AndroidLauncher;->initialize(Lcom/badlogic/gdx/ApplicationListener;Lcom/badlogic/gdx/backends/android/AndroidApplicationConfiguration;)V
++
++    const/4 v1, 0x1
++
++    new-array v2, v1, [Ljava/lang/String;
++
++    const/4 v3, 0x0
++
++    aput-object v0, v2, v3
++
++    invoke-virtual {p0, v2, v1}, Lfluddokt/opsu/android/AndroidLauncher;->requestPermissions([Ljava/lang/String;I)V
++
++    return-void
++
++    :perm_ok
++    const/4 v1, 0x1
++
+     .line 19
+     new-instance v0, Lcom/badlogic/gdx/backends/android/AndroidApplicationConfiguration;
+ 
+@@ -55,3 +92,31 @@
+     .line 42
+     return-void
+ .end method
++
++
++.method public onRequestPermissionsResult(I[Ljava/lang/String;[I)V
++    .registers 7
++
++    invoke-super {p0, p1, p2, p3}, Lcom/badlogic/gdx/backends/android/AndroidApplication;->onRequestPermissionsResult(I[Ljava/lang/String;[I)V
++
++    if-eqz p3, :denied
++
++    array-length v0, p3
++
++    if-lez v0, :denied
++
++    const/4 v1, 0x0
++
++    aget v0, p3, v1
++
++    if-nez v0, :denied
++
++    invoke-virtual {p0}, Lfluddokt/opsu/android/AndroidLauncher;->recreate()V
++
++    return-void
++
++    :denied
++    invoke-virtual {p0}, Lfluddokt/opsu/android/AndroidLauncher;->finish()V
++
++    return-void
++.end method

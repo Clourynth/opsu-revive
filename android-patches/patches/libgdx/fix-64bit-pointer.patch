@@ -1,0 +1,31 @@
+diff --git a/gdx/jni/android/AndroidGL20.cpp b/gdx/jni/android/AndroidGL20.cpp
+index 1d0dc9a..af51b56 100644
+--- a/gdx/jni/android/AndroidGL20.cpp
++++ b/gdx/jni/android/AndroidGL20.cpp
+@@ -98,7 +98,7 @@ getPointer(JNIEnv *_env, jobject buffer, jarray *array, jint *remaining)
+             getBasePointerID, buffer);
+     if (pointer != 0L) {
+         *array = NULL;
+-        return (void *) (jint) pointer;
++        return (void *) (intptr_t) pointer;
+     }
+ 
+     *array = (jarray) _env->CallStaticObjectMethod(nioAccessClass,
+@@ -695,7 +695,7 @@ JNIEXPORT void JNICALL Java_com_badlogic_gdx_backends_android_AndroidGL20_glDraw
+ JNIEXPORT void JNICALL Java_com_badlogic_gdx_backends_android_AndroidGL20_glDrawElements__IIII
+   (JNIEnv *, jobject, jint mode, jint count, jint type, jint indices)
+ {
+-	glDrawElements( mode, count, type, (const void*)indices );
++	glDrawElements( mode, count, type, (const void*)(intptr_t)indices );
+ }
+ 
+ /*
+@@ -2058,7 +2058,7 @@ JNIEXPORT void JNICALL Java_com_badlogic_gdx_backends_android_AndroidGL20_glVert
+ JNIEXPORT void JNICALL Java_com_badlogic_gdx_backends_android_AndroidGL20_glVertexAttribPointer__IIIZII
+   (JNIEnv *, jobject, jint indx, jint size, jint type, jboolean normalized, jint stride, jint ptr)
+ {
+-	glVertexAttribPointer( indx, size, type, normalized, stride, (const void*)ptr );
++	glVertexAttribPointer( indx, size, type, normalized, stride, (const void*)(intptr_t)ptr );
+ }
+ 
+ /*
