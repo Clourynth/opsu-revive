@@ -13,7 +13,7 @@ opsu!revive focuses on **compatibility** and **performance** on modern Android d
 
 - **ARM64 support**: native `arm64-v8a` build for modern 64-bit devices.
 - **Android 14 compatibility**: builds and runs on Android 14.
-- **Low latency audio**: lower and more consistent audio latency, so hitsounds feel more responsive and your timing feels tighter.
+- **Low latency audio**: lower audio latency and no more hitsound micro-stutter. Hitsound consistency on dense streams is still being tested (see [known issues](android-patches/docs/known-issues.md)).
 
 ## Tested devices
 
@@ -31,6 +31,32 @@ Other devices are untested. Reports are welcome in the [issue tracker](https://g
 - Continue improving compatibility and performance.
 
 ## Building
+
+### Build the APK with the patches
+
+The files in [`android-patches/`](android-patches/) turn the original **Opsu-android 0.16.1a** APK into opsu!revive. The source in this repository is not modified by them.
+
+1. Get the original `Opsu-android0_16_1a.apk` (SHA-256 `2f43d8d0f1d50ae8b774b6f275cdfd5b896e5febcca6c71eaffdd94c59538306`).
+2. Install the tools (Debian/Ubuntu):
+   ```bash
+   sudo apt install openjdk-17-jre-headless libsmali-java zipalign apksigner python3 patch
+   ```
+3. Build:
+   ```bash
+   cd android-patches
+   scripts/build_apk.sh /path/to/Opsu-android0_16_1a.apk Opsu-revive.apk
+   ```
+4. Check the result:
+   ```bash
+   scripts/verify.sh Opsu-revive.apk v8
+   ```
+
+Notes:
+- Requires Android 8.0+. The build uses a temporary debug key unless you set `KEYSTORE`, `KS_ALIAS` and `KS_PASS`; use your own key for public releases.
+- `TARGET=v3` builds the minimal version (ARM64 + Android 14 fixes only). Newer levels add low-latency audio (v4-v5), experimental hitsound resampling (v6) and version/branding (v7-v8). The default is v8.
+- More options and details: [`android-patches/docs/building.md`](android-patches/docs/building.md).
+
+### Build from source
 
 This repository includes only the source which is directly inherited from the upstream project. To build it, use:
 
